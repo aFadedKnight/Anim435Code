@@ -32,7 +32,7 @@ def make_building(num_floors=1):
 def main():
     # Set up argparse for command-line arguments
     parser = argparse.ArgumentParser(description="Create a building in Maya with a given number of floors.")
-    parser.add_argument('--floors', type=int, default=1, help='Number of floors for the building')
+    parser.add_argument('-f','--floors', type=int, default=1, help='Number of floors for the building')
 
     args = parser.parse_args()
     num_floors = args.floors
