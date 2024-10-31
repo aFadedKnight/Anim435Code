@@ -1,6 +1,6 @@
 '''
 This script will save a maya file and name it based on the environment. After saving it will export the objects that are selected in a maya scene, if nothing is selected it exports the whole scene, and exports as an fbx file with a naming convention based on the environment.
-Naming convention is "objectname_taskname_user_v###.ma" and "objectname_v###.fbx" and the files are saved into a maya folder and fbx folder respectively, inside an object folder in the environment directory.
+Naming convention is "objectname_taskname_user_v###.ma" and "objectname_taskname_user_v###.fbx" and the files are saved into a maya folder and fbx folder respectively, inside an object folder in the environment directory that is automatically created.
 '''
 import os
 import json
