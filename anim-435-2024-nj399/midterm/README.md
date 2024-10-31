@@ -48,10 +48,18 @@ Note: If you are opening an exsisting file just make sure you are opening a file
 From here you can work on your project and use the script when needed.
 
 ## Python Script for Maya
-This script will save out a .ma file and export a .fbx file from maya with into folders and with naming based on your environment(see notes in script for more details).
+This script will save out a .ma file and export a .fbx file from maya with into folders and with naming based on your environment. The fbx file exports the selected objects if nothing is selected it will export the full scene.
 
-Use the script "midterm.py" located in the python folder. You can either run this script using script editor, or create a shelf button that will run the script.
+Use the script "midterm.py" located in the python folder. You can either run this script using script editor, or create a shelf button that will run the script. An easy way to create a shelf button is to copy the python code into a python script editor. Select all the code in the script editor and then click and drag it to your shelf, make sure you select python, and it will add the button for you(It is easier if you also make the necisarry adjustments below before this step).
+
+You may need to update the script on line 11 so that the file path is where the fbx.settings.json file is located. This script will print to the console your file location or some help to errors you may run into based on environment issues.
 
 You can change the fbx export settings used by updating the fbx.settings.json file located in the config folder.
 
-You may need to update the script on line 11 so that the file path is where the fbx.settings.json file is located. This script will print to the console your file location or some help to errors you may run into based on environment issues.
+## Troubleshooting
+
+### Can't find exported/saved files
+Check the maya log, the script will print out the path to the files.
+
+### Files not saving to correct location or at all
+Double check your git bash aliases.sh file has been updated to correctly for the PROJECT_DIR variable. The formatting is not the same as python you can drag and drop the folder you want the path to in a git bash terminal to copy correct formatting.
