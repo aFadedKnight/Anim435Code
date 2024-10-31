@@ -26,7 +26,7 @@ scene() {
     export TASK="$3"
 	export USER="$4"
 
-	export PROJECT_DIR=/c/Project/scenes/"$SCENE""$SCENE" #path to your project directory with '/"$SCENE"' at the end this uses the example directory provided
+	export PROJECT_DIR=/c/Project/scenes/"$SCENE" #path to your project directory with '/"$SCENE"' at the end this uses the example directory provided
 	echo Setting project to "$PROJECT_DIR"
 	cd "$PROJECT_DIR"
 	export MAYA_PROJECT="$PROJECT_DIR"
@@ -50,6 +50,8 @@ From here you can work on your project and use the script when needed.
 ## Python Script for Maya
 This script will save out a .ma file and export a .fbx file from maya with into folders and with naming based on your environment(see notes in script for more details).
 
-Use the script "assignment4.py" located in the python folder. You can either run this script using script editor, or create a shelf button that will run the script.
+Use the script "midterm.py" located in the python folder. You can either run this script using script editor, or create a shelf button that will run the script.
 
-There shouldn't be any modifications to the script unless the fbx export settings or maya file type is wanted to be changed. This script will print to the console your file location or some help to errors you may run into based on environment issues.
+You can change the fbx export settings used by updating the fbx.settings.json file located in the config folder.
+
+You may need to update the script on line 11 so that the file path is where the fbx.settings.json file is located. This script will print to the console your file location or some help to errors you may run into based on environment issues.

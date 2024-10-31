@@ -24,7 +24,7 @@ scene() {
 	export SCENE="$1"
 	export OBJECT="$2"
 
-	export PROJECT_DIR=/c/Project/scenes/"$SCENE""$SCENE" #path to your project directory with '/"$SCENE"' at the end this uses the example directory provided
+	export PROJECT_DIR=/c/Project/scenes/"$SCENE" #path to your project directory with '/"$SCENE"' at the end this uses the example directory provided
 	echo Setting project to "$PROJECT_DIR"
 	cd "$PROJECT_DIR"
 	export MAYA_PROJECT="$PROJECT_DIR"
