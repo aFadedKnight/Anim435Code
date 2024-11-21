@@ -1,0 +1,41 @@
+{
+    "penguin_rig_nj399_v002": {
+        "timestamp": "2024-11-21 18:23:17",
+        "user": "nj399",
+        "task": "rig",
+        "object_name": "penguin",
+        "maya_file_location": "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/maya/penguin_rig_nj399_v002",
+        "fbx_file_location": "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/fbx/penguin_rig_nj399_v002"
+    },
+    "penguin_rig_nj399_v004": {
+        "timestamp": "2024-11-21 18:33:17",
+        "software_version": "2025",
+        "user": "nj399",
+        "task": "rig",
+        "object_name": "penguin",
+        "maya_file_location": "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/maya/penguin_rig_nj399_v004",
+        "may_file_size": 53068,
+        "fbx_file_location": "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/fbx/penguin_rig_nj399_v004",
+        "fbx_file_size": 8368,
+        "polycount": "Nothing counted : no polygonal object is selected.",
+        "dependencies": [
+            "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/maya/penguin_rig_nj399_v004.ma"
+        ]
+    },
+    "penguin_rig_nj399_v005": {
+        "timestamp": "2024-11-21 18:34:58",
+        "software_version": "2025",
+        "user": "nj399",
+        "task": "rig",
+        "object_name": "penguin",
+        "maya_file_location": "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/maya/penguin_rig_nj399_v005",
+        "may_file_size": 54635,
+        "fbx_file_location": "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/fbx/penguin_rig_nj399_v005",
+        "fbx_file_size": 8384,
+        "polycount": "Nothing counted : no polygonal object is selected.",
+        "dependencies": [
+            "F:/School/TechDirecting/Week4/Project/scene/arctic/penguin/maya/penguin_rig_nj399_v005.ma",
+            "F:/School/TechDirecting/Week4/Project/scene/jungle/model/maya/model_test__v008.ma"
+        ]
+    }
+}

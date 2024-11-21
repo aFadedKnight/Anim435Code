@@ -10,8 +10,11 @@ FORMAT = "[%(asctime)s][%(filename)s][%(levelname)s] %(msg)s"
 logging.basicConfig(filename='log.txt',level=logging.INFO, format=FORMAT)
 logger.info('Starting')
 
+metadata_file = "C:/Users/nicky/OneDrive/Documents/GitHub/Anim435Code/anim-435-2024-nj399/assignment6/config/metadata.json"  # Path to save metadata
+
+
 # Load FBX export settings from a JSON file
-fbx_settings_file = "C:/Users/nicky/OneDrive/Documents/GitHub/Anim435Code/anim-435-2024-nj399/midterm/config/fbx.settings.json"  # Update this path to your JSON file
+fbx_settings_file = "C:/Users/nicky/OneDrive/Documents/GitHub/Anim435Code/anim-435-2024-nj399/assignment6/config/fbx.settings.json"  # Update this path to your JSON file
 try:
     logger.info(f'Loading fbx export settings from {fbx_settings_file}')
     with open(fbx_settings_file, 'r') as file:
@@ -102,3 +105,37 @@ except RuntimeError as e:
 # Print feedback to user to see where the files were saved
 logger.info(f'File saved: {save_dir}/{file_name}.ma')
 logger.info(f'File saved: {export_dir}{file_name}.fbx')
+
+# Export metadata
+metadata_entry = {
+    "timestamp": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+    "software_version": cmds.about(version=True),
+    "user": user,
+    "task": task,
+    "object_name": object_name,
+    "maya_file_location": f"{save_dir}{file_name}",
+    "may_file_size": os.path.getsize(f"{save_dir}/{file_name}.ma"),
+    "fbx_file_location": f"{export_dir}{file_name}",
+    "fbx_file_size": os.path.getsize(f"{export_dir}/{file_name}.fbx"),
+    "polycount": cmds.polyEvaluate(face=True),
+    "dependencies": cmds.file(query=True, list=True)
+}
+
+try:
+    if os.path.exists(metadata_file):
+        # Load existing metadata
+        with open(metadata_file, 'r') as file:
+            metadata = json.load(file)
+    else:
+        metadata = {}
+
+    # Add or update the entry for the current Maya file
+    metadata[file_name] = metadata_entry
+
+    # Save updated metadata back to the file
+    with open(metadata_file, 'w') as file:
+        json.dump(metadata, file, indent=4)
+    logger.info(f'Metadata updated successfully in {metadata_file}')
+
+except Exception as e:
+    logger.error(f"Error updating metadata file {metadata_file}: {e}")
