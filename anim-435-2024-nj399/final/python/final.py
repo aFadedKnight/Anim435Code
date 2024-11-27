@@ -2,7 +2,7 @@
 #maya.standalone.initialize(name="python")
 #import maya.cmds as cmds
 import argparse
-import json, csv
+import json, csv, os
 
 def decimate(amount=50, file=""):
         """
@@ -47,6 +47,10 @@ def main():
 
     amount="half"
     file_to_decimate="C:\\Users\\nicky\\Desktop"
+
+    # Check file location
+    if not os.path.exists(file_to_decimate):
+         print('Path to file does not exist')
 
     # Check if amount is an integer value if not get data from json
     try:
