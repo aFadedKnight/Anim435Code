@@ -2,7 +2,7 @@
 #maya.standalone.initialize(name="python")
 #import maya.cmds as cmds
 import argparse
-import json
+import json, csv
 
 def decimate(amount=50, file=""):
         """
@@ -18,10 +18,23 @@ def decimate(amount=50, file=""):
         print(file)
         # TO-DO: create code that will decimate geometry inside a given file.
 
-        #Save File
+        # Save File
         #maya.cmds.file(rename=r"new name in same directory")
         #maya.cmds.file(save=True)
 
+        # Export CSV
+        csv_file = f'{og_file_name}.{amount}.report.csv'
+
+        data = [
+            ['Geometry', 'OG Polycount', "New Polycount", "Amount Removed"],  # Headers
+            [{geometry}, {og_polycount}, {new_polycount}, {amount}]
+        ]
+        
+        with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
+            writer = csv.writer(file)
+            writer.writerows(data)
+
+ 
 def main():
     # Set up argparse for command-line arguments
     parser = argparse.ArgumentParser(description="Decimate geometry inside a file by a given amount")
