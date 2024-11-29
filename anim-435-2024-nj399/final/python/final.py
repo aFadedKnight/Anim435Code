@@ -1,8 +1,9 @@
-#import maya.standalone
-#maya.standalone.initialize(name="python")
-#import maya.cmds as cmds
+import maya.standalone
+import maya.cmds as cmds
 import argparse
 import json, csv, os
+
+maya.standalone.initialize(name="python")
 
 def decimate(amount=50, file="", directory=""):
         """
@@ -51,8 +52,8 @@ def main():
     amount = args.amount
     file_to_decimate = args.file
 
-    amount="half"
-    file_to_decimate="C:/Projects/file.ma"
+    #amount="half"
+    #file_to_decimate="C:/Projects/file.ma"
 
     # Check file exists and is a maya file
     #if not os.path.exists(file_to_decimate):
@@ -65,7 +66,7 @@ def main():
     try:
           amount = int(amount)
     except:
-        lods = "final/config/lods.json"
+        lods = "C:\\Users\\nicky\\Documents\\GitHub\\Anim435Code\\anim-435-2024-nj399\\final\\config\\lods.json" # Change this to path of your json file
         try:
             with open(lods, 'r') as file:
                 lod_values = json.load(file)
