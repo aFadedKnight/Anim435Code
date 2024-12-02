@@ -7,7 +7,8 @@ maya.standalone.initialize(name="python")
 
 def decimate(amount=50, file="", directory=""):
         """
-        This function uses amount and will decimate geometry from a file based on the amount passed in.
+        This function uses amount and will decimate geometry from a file based on the amount passed in. 
+        It will finish by saving out a new maya binary file with the decimated geometry and a csv file containing some metadata.
 
         Args:
         amount = value to decimate gemoetry by
@@ -17,29 +18,43 @@ def decimate(amount=50, file="", directory=""):
         Returns:
         None
         """
-        print(amount,file,directory)
+        # Open the Maya file
+        maya_file = f'{directory}/{file}'
+        cmds.file(maya_file, open=True, force=True)
 
-        # TO-DO: get information on original polycount
+        # Iterate through geometry and reduce polycount
+        all_meshes = cmds.ls(type="mesh")
+        og_polycount = 0
+        for mesh in all_meshes:
+            og_polycount += cmds.polyEvaluate(mesh, face=True)
+            cmds.polyReduce(mesh,p=amount,kqw=0.5, version=1)
 
-        # TO-DO: create code that will decimate geometry inside a given file.
+        # Generate output filename
+        output_file = (f"{maya_file}.{amount}.mb")
 
-        # Save File
-        #maya.cmds.file(rename=r"new name in same directory")
-        #maya.cmds.file(save=True)
+        # Save the decimated file
+        cmds.file(rename=output_file)
+        cmds.file(save=True, type="mayaBinary")
+        print(f"Decimated file saved as: {output_file}")
 
-        # Export CSV (needs variables in the data variable to be defined - geometry, og_polycount, new_polycount)
-        '''
+        # Iterate through geometry and get polycount
+        cmds.file(output_file, open=True, force=True)
+        all_meshes = cmds.ls(type="mesh")
+        new_polycount = 0
+        for mesh in all_meshes:
+            new_polycount += cmds.polyEvaluate(mesh, face=True)
+
+        # Export csv file
         csv_file = f'{directory}/{file}.{amount}.report.csv'
 
         data = [
-            ['Geometry', 'OG Polycount', "New Polycount", "Amount Removed"],  # Headers
-            [{geometry}, {og_polycount}, {new_polycount}, {amount}]
+            ['File', 'OG Polycount', "New Polycount", "Percent Removed"],  # Headers
+            [file, og_polycount, new_polycount, amount]
         ]
         
         with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
             writer = csv.writer(file)
             writer.writerows(data)
-        '''
 
  
 def main():
@@ -56,17 +71,17 @@ def main():
     #file_to_decimate="C:/Projects/file.ma"
 
     # Check file exists and is a maya file
-    #if not os.path.exists(file_to_decimate):
-    #    print('Path to file does not exist')
-    #elif not file_to_decimate.endswith('.mb','.ma'):
-    #     print('Path given was not a maya file')
+    if not os.path.exists(file_to_decimate):
+        print('Path to file does not exist')
+    elif not file_to_decimate.endswith('.ma') and not file_to_decimate.endswith('.mb'):
+         print('Path given was not a maya file')
 
 
     # Check if amount is an integer value if not get data from json
     try:
           amount = int(amount)
     except:
-        lods = "C:\\Users\\nicky\\Documents\\GitHub\\Anim435Code\\anim-435-2024-nj399\\final\\config\\lods.json" # Change this to path of your json file
+        lods = "C:\\Users\\nicky\\OneDrive\\Documents\\GitHub\\Anim435Code\\anim-435-2024-nj399\\final\\config\\lods.json" # Change this to path of your json file
         try:
             with open(lods, 'r') as file:
                 lod_values = json.load(file)

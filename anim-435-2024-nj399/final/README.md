@@ -9,12 +9,12 @@ Open a command prompt. You can then run the script using '"C:\Program Files\Auto
 #### Git Bash
 In the aliases.sh folder, genereall located at "C:\Program Files\Git\etc\profile.d\aliases.sh", paste in the following alias which will make it so you don't need type the entire path to mayapy evertime.
 ```bash
-alias maya='/c/Program\ Files/Autodesk/Maya2025/bin/mayapy.exe' #path to your mayapy.exe file
+alias mayapy='/c/Program\ Files/Autodesk/Maya2025/bin/mayapy.exe' #path to your mayapy.exe file
 ```
 
 Most likely the path used in the example will be where your mayapy is if using maya 2025(just change the 2025 to be your correct verison if not using 2025)
 
-Open a Git Bash window. You can then run the script using '"mayapy "final.py" -f "c:/path/to/maya/file" -a half'. Make sure that you are using the path to your final.py file.
+Open a Git Bash window. You can then run the script using 'mayapy "c:/path/to/final.py" -f "c:/path/to/maya/file" -a half'. Make sure that you are using the path to your final.py file.
 
 ### Arguments
 
