@@ -1,21 +1,29 @@
+import json, csv, os, argparse, logging
 import maya.standalone
 import maya.cmds as cmds
 from datetime import datetime
-import json, csv, os, argparse, logging
+
+#getting directory of script
+script_directory = os.path.dirname(__file__)
 
 # Start mayapy
 maya.standalone.initialize(name="python")
 
-# Setting path to lods.json. This setting needs to be changed to your lods.json location
-lods = "C:\\Users\\nicky\\Documents\\GitHub\\Anim435Code\\anim-435-2024-nj399\\final\\config\\lods.json" # Change this to path of your json file
+# Setting path to lods.json
+lod_directory = os.path.dirname(script_directory)
+lods = f"{lod_directory}/config/lods.json"
 
 
 #Setup Logger
 logger = logging.getLogger(__name__)
 
-FORMAT = "[%(asctime)s][%(filename)s][%(levelname)s] %(msg)s"
+FORMAT = "[%(asctime)s][%(filename)s][%(levelname)s]: %(msg)s"
 
-logging.basicConfig(filename='log.txt',level=logging.INFO, format=FORMAT)
+log_file =f'{script_directory}\log.txt'
+file_handler = logging.FileHandler(log_file)
+file_handler.setFormatter(logging.Formatter(FORMAT))
+logger.addHandler(file_handler)
+
 logger.info('Starting')
 
 def decimate(amount=50, file="", directory="", mode='preserve'):
@@ -69,8 +77,8 @@ def decimate(amount=50, file="", directory="", mode='preserve'):
         csv_file = f'{directory}/{file}.{amount}.report.csv'
 
         data = [
-            ['File', 'OG Polycount', "New Polycount", "Percent Removed", "Log Date/Time"],  # Headers
-            [file, og_polycount, new_polycount, amount, datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
+            ['File', 'OG Polycount', "New Polycount", "Percent Removed", "Mode", "Log Date/Time"],  # Headers
+            [file, og_polycount, new_polycount, amount, mode, datetime.now().strftime("%Y-%m-%d %H:%M:%S")]
         ]
         
         with open(csv_file, mode='w', newline='', encoding='utf-8') as file:
@@ -98,7 +106,11 @@ def main():
     args = parser.parse_args()
     amount = args.amount
     file_to_decimate = args.file
-    mode =args.mode
+    mode = args.mode
+
+    # Check if mode was set if not set it to preserve
+    if mode == None:
+         mode = "preserve"
 
     # Check file exists and is a maya file
     if not os.path.exists(file_to_decimate):
@@ -111,7 +123,7 @@ def main():
 
     # Check if amount is an integer value if not get data from json
     try:
-          logger.info("Chacking amount value")
+          logger.info("Checking amount value")
           amount = int(amount)
     except:
         logger.info("Getting amount setting from lods.json")

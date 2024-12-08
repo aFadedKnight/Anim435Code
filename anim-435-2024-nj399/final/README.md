@@ -1,15 +1,16 @@
 # Final: Decimate Geometry
 Decimate geometry inside a maya file to create different LODs
 
-## Setup
-
-Change the path to the lods.json file on in line 10. Make sure it matches the location of your lods.json file.
-
 ## Use
-
 This script is meant to be run in a terminal and uses mayapy to reduce the geometry. The file that you want to reduce the geometry in does not need to be in the same directory as the script.
 
-Note that when running the script a log file is created or updated if one already exsists. Additionally, a csv file is created with every file saved in the same directory as the maya file.
+Nothing in the script needs to be changed just make sure that you keep the folder structure within the "final" folder directory and refrenced files will be found and save locations will be correct
+
+Note:
+
+When running the script a log file is created or updated if one already exsists inside the sam directory as the script. Additionally, a csv file is created with every file saved in the same directory as the original and new maya files.
+
+If you run the script with the same settings on the same maya file then the previous maya and csv files generated will be overwritten.
 
 #### Command Prompt
 Open a command prompt. You can then run the script using '"C:\Program Files\Autodesk\Maya2025\bin\mayapy.exe" "final.py" -f "c:/path/to/maya/file" -a half'. Make sure that you are using the path to your mayapy.exe as well as the path to your final.py file. Most likely the path used in the example will be where your mayapy is if using maya 2025(just change the 2025 to be your correct verison if not using 2025)
