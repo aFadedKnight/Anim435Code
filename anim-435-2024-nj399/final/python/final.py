@@ -6,6 +6,10 @@ import json, csv, os, argparse, logging
 # Start mayapy
 maya.standalone.initialize(name="python")
 
+# Setting path to lods.json. This setting needs to be changed to your lods.json location
+lods = "C:\\Users\\nicky\\Documents\\GitHub\\Anim435Code\\anim-435-2024-nj399\\final\\config\\lods.json" # Change this to path of your json file
+
+
 #Setup Logger
 logger = logging.getLogger(__name__)
 
@@ -111,7 +115,6 @@ def main():
           amount = int(amount)
     except:
         logger.info("Getting amount setting from lods.json")
-        lods = "C:\\Users\\nicky\\OneDrive\\Documents\\GitHub\\Anim435Code\\anim-435-2024-nj399\\final\\config\\lods.json" # Change this to path of your json file
         try:
             with open(lods, 'r') as file:
                 lod_values = json.load(file)
